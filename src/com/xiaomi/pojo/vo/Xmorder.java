@@ -3,7 +3,7 @@ package com.xiaomi.pojo.vo;
 import java.util.Date;
 
 public class Xmorder {
-    @Override
+	@Override
 	public String toString() {
 		return "Xmorder [orderId=" + orderId + ", uid=" + uid + ", cartId=" + cartId + ", orderStatus=" + orderStatus
 				+ ", createTime=" + createTime + "]";
@@ -11,51 +11,51 @@ public class Xmorder {
 
 	private Integer orderId;
 
-    private Integer uid;
+	private Integer uid;
 
-    private String cartId;
+	private String cartId;
 
-    private Integer orderStatus;
+	private Integer orderStatus;
 
-    private Date createTime;
+	private Date createTime;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
 
-    public Integer getUid() {
-        return uid;
-    }
+	public Integer getUid() {
+		return uid;
+	}
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 
-    public String getCartId() {
-        return cartId;
-    }
+	public String getCartId() {
+		return cartId;
+	}
 
-    public void setCartId(String cartId) {
-        this.cartId = cartId == null ? null : cartId.trim();
-    }
+	public void setCartId(String cartId) {
+		this.cartId = cartId == null ? null : cartId.trim();
+	}
 
-    public Integer getOrderStatus() {
-        return orderStatus;
-    }
+	public Integer getOrderStatus() {
+		return orderStatus;
+	}
 
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 }

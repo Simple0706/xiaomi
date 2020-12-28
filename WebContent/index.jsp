@@ -68,12 +68,20 @@ width:100%;
 			<div class="fr">
 				<ul>
 			<li><a href="UserServlet?operate=selfinfo">个人中心</a></li>
+			
+			<c:if test="${ username!=null}">
+			<li>欢迎${username.username}访问</li>
 			<li><a href="UserServlet?operate=logout">退出登录 </a> </li>
-	
+			</c:if>
+			
+			<c:if test="${ username==null}">
 			<li><a href="login.jsp" >登录</a></li>
 			<li>|</li>
 			<li><a href="register.jsp" >注册</a></li>
 			<li>|</li>
+			</c:if>
+			
+			
 			<li><a href="">消息通知</a></li>
 				</ul>
 			</div>
