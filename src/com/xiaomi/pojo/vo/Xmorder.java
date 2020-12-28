@@ -3,7 +3,13 @@ package com.xiaomi.pojo.vo;
 import java.util.Date;
 
 public class Xmorder {
-    private Integer orderId;
+    @Override
+	public String toString() {
+		return "Xmorder [orderId=" + orderId + ", uid=" + uid + ", cartId=" + cartId + ", orderStatus=" + orderStatus
+				+ ", createTime=" + createTime + "]";
+	}
+
+	private Integer orderId;
 
     private Integer uid;
 

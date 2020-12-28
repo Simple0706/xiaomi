@@ -1,7 +1,13 @@
 package com.xiaomi.pojo.vo;
 
 public class Users {
-    private Integer uid;
+    @Override
+	public String toString() {
+		return "Users [uid=" + uid + ", username=" + username + ", password=" + password + ", phonenumber="
+				+ phonenumber + ", address=" + address + ", hobby=" + hobby + ", sign=" + sign + "]";
+	}
+
+	private Integer uid;
 
     private String username;
 

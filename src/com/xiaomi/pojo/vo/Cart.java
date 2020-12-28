@@ -1,7 +1,13 @@
 package com.xiaomi.pojo.vo;
 
 public class Cart {
-    private Integer preId;
+    @Override
+	public String toString() {
+		return "Cart [preId=" + preId + ", uid=" + uid + ", goodId=" + goodId + ", goodNum=" + goodNum + ", status="
+				+ status + ", price=" + price + "]";
+	}
+
+	private Integer preId;
 
     private Integer uid;
 

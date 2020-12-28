@@ -1,7 +1,14 @@
 package com.xiaomi.pojo.vo;
 
 public class Good {
-    private Integer goodId;
+    @Override
+	public String toString() {
+		return "Good [goodId=" + goodId + ", goodName=" + goodName + ", goodPrice=" + goodPrice + ", goodType="
+				+ goodType + ", goodColor=" + goodColor + ", goodCount=" + goodCount + ", goodImg=" + goodImg
+				+ ", goodDesc=" + goodDesc + "]";
+	}
+
+	private Integer goodId;
 
     private String goodName;
 
