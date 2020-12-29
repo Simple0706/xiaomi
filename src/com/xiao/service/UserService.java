@@ -22,6 +22,7 @@ public class UserService {
 		List<Users> selectByExample = mapper.selectByExample(usersExample);
 		
 		if(selectByExample.size()>0){
+			sqlSession.rollback();
 			return 0;
 		}else{
 			mapper.insertSelective(user);
@@ -38,12 +39,34 @@ public class UserService {
 		UsersMapper mapper = sqlSession.getMapper(UsersMapper.class);
 		Criteria createCriteria = usersExample.createCriteria();
 		createCriteria.andUsernameEqualTo(user.getUsername());
+		createCriteria.andPasswordEqualTo(user.getPassword());
 		List<Users> selectByExample = mapper.selectByExample(usersExample);
 		if(selectByExample.size()>0){
 			return selectByExample.get(0);
 		}else{
 			return null;
 		}
+	}
+	//修改个人中心
+	public Users editupdate(Users upuser,int uid){
+		SqlSession sqlSession = DButil.getSqlSession();
+		UsersExample usersExample = new UsersExample();
+		UsersMapper mapper = sqlSession.getMapper(UsersMapper.class);
+		Criteria createCriteria = usersExample.createCriteria();
+		createCriteria.andUidEqualTo(uid);
+		mapper.updateByExampleSelective(upuser, usersExample);
+		sqlSession.commit();
+		SqlSession sqlSession1 = DButil.getSqlSession();	
+		UsersExample usersExample2 = new UsersExample();
+		UsersMapper mapper2 = sqlSession1.getMapper(UsersMapper.class);
+		Criteria createCriteria1 = usersExample2.createCriteria();
+		createCriteria1.andUidEqualTo(uid);
+		List<Users> selectByExample = mapper2.selectByExample(usersExample2);
+		Users user = selectByExample.get(0);
+		
+		sqlSession1.commit();
+		return user;
+
 	}
 	
 }

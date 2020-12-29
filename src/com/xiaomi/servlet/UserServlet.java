@@ -26,17 +26,34 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	String operate = request.getParameter("operate");
+    	//跳转登录界面
     	if("logout".equals(operate)){
 			request.getSession().invalidate();
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
+    	//跳转个人中心
+    	if("selfinfo".equals(operate)){
+    		request.getRequestDispatcher("self_info.jsp").forward(request, response);
+    			
+    		}
+    	//跳转修改个人中心
+    	if("edit".equals(operate)){
+    		String uid = request.getParameter("uid");
+    		request.getSession().setAttribute("uid", uid);
+    		request.getRequestDispatcher("edituser.jsp").forward(request, response);
+    	}
+    	
+    	
+    	
     }
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		UserService userService = new UserService();
 		String operate = request.getParameter("operate");
+		//注册验证
 		if("register".equals(operate)){
 			String image = request.getParameter("image").toLowerCase();
 			String code =(String) request.getSession().getAttribute("code");
@@ -65,8 +82,10 @@ public class UserServlet extends HttpServlet {
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}else{
 				request.getRequestDispatcher("login.jsp").forward(request, response);
-			}
-		}if("login".equals(operate)){
+			}	
+		}
+		//登录验证
+		if("login".equals(operate)){
 			
 			String image = request.getParameter("image").toLowerCase();
 			String code =(String) request.getSession().getAttribute("code");
@@ -81,18 +100,38 @@ public class UserServlet extends HttpServlet {
 			Users user = new Users();
 			user.setUsername(username);
 			user.setPassword(password);
-			 Users login = userService.login(user);
+			Users login = userService.login(user);
 			if(login!=null){
 				HttpSession session = request.getSession();
-				session.setAttribute("username",login);
+				session.setAttribute("user",login);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "用户名不存在或密码错误");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
+		}
+		//修改个人中心资料
+		if("editupdate".equals(operate)){
+			String uid = (String)request.getSession().getAttribute("uid");
+			String password = request.getParameter("password");
+			String phonenumber = request.getParameter("phonenumber");
+			String address = request.getParameter("address");
+			String hobby = request.getParameter("hobby");
+			String sign = request.getParameter("sign");
+			Users upuser = new Users();
+			upuser.setPassword(password);
+			upuser.setHobby(hobby);
+			upuser.setPhonenumber(phonenumber);
+			upuser.setSign(sign);
+			upuser.setAddress(address);
+			Users editupdate = userService.editupdate(upuser,Integer.valueOf(uid));
+			request.getSession().removeAttribute("user");
+			request.getSession().setAttribute("user", editupdate);
+			request.getRequestDispatcher("self_info.jsp").forward(request, response);
+			
+//			request.setAttribute("user", );
 			
 		}
-		
 		
 		
 		
