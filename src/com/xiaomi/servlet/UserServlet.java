@@ -22,7 +22,15 @@ public class UserServlet extends HttpServlet {
         super();
         
     }
-
+ 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String operate = request.getParameter("operate");
+    	if("logout".equals(operate)){
+			request.getSession().invalidate();
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+    }
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,9 +38,10 @@ public class UserServlet extends HttpServlet {
 		UserService userService = new UserService();
 		String operate = request.getParameter("operate");
 		if("register".equals(operate)){
-			String image = request.getParameter("image");
+			String image = request.getParameter("image").toLowerCase();
 			String code =(String) request.getSession().getAttribute("code");
-			if(!image.equals(code)){
+			String code1 = code.toLowerCase();
+			if(!image.equals(code1)){
 				request.setAttribute("rmsg", "验证码错误");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 				return ;
@@ -59,9 +68,10 @@ public class UserServlet extends HttpServlet {
 			}
 		}if("login".equals(operate)){
 			
-			String image = request.getParameter("image");
+			String image = request.getParameter("image").toLowerCase();
 			String code =(String) request.getSession().getAttribute("code");
-			if(!image.equals(code)){
+			String code1=code.toLowerCase();
+			if(!image.equals(code1)){
 				request.setAttribute("imageError", "验证码错误");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return ;
@@ -82,6 +92,8 @@ public class UserServlet extends HttpServlet {
 			}
 			
 		}
+		
+		
 		
 		
 		

@@ -16,7 +16,7 @@ public class Filter implements javax.servlet.Filter {
 
    
     public Filter() {
-        // TODO Auto-generated constructor stub
+       
     }
 
 	
@@ -33,7 +33,7 @@ public class Filter implements javax.servlet.Filter {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -42,7 +42,7 @@ public class Filter implements javax.servlet.Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+		System.out.println("过滤器创建");
 		
 	}
 
