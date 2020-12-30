@@ -6,6 +6,20 @@ public class Cart {
 		return "Cart [preId=" + preId + ", uid=" + uid + ", goodId=" + goodId + ", goodNum=" + goodNum + ", status="
 				+ status + ", price=" + price + "]";
 	}
+	
+	public Cart() {
+		super();
+	}
+
+	public Cart(Integer preId, Integer uid, Integer goodId, Integer goodNum, Integer status, Float price) {
+		super();
+		this.preId = preId;
+		this.uid = uid;
+		this.goodId = goodId;
+		this.goodNum = goodNum;
+		this.status = status;
+		this.price = price;
+	}
 
 	private Integer preId;
 

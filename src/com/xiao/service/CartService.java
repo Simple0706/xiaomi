@@ -36,4 +36,29 @@ public class CartService {
 		Good selectByPrimaryKey = mapper.selectByPrimaryKey(id);
 		return selectByPrimaryKey;
 	}
+	//添加数据
+	public int insert(Cart cart){
+		SqlSession sqlSession = DButil.getSqlSession();
+		CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+		int insert = mapper.insertSelective(cart);
+		if(insert>0){
+			sqlSession.commit();
+			return 1;
+		}else{
+			sqlSession.rollback();
+		return 0;
+		}
+	}
+	//修改表数据
+	public int updataGood_Num(Cart cart,int id){
+		SqlSession sqlSession = DButil.getSqlSession();
+		CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+		CartExample cartExample = new CartExample();
+		Criteria createCriteria = cartExample.createCriteria();
+		createCriteria.andPreIdEqualTo(id);
+		mapper.updateByExampleSelective(cart, cartExample);
+		sqlSession.commit();
+		sqlSession.close();
+		return 1;
+	}
 }
