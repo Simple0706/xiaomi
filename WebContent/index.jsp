@@ -94,7 +94,7 @@ width:100%;
 
 <!-- start banner_x -->
 <div class="banner_x center">
-	<a href="./index.html" target="_blank"><div class="logo fl"></div></a>
+	<a href="index.jsp" target="_blank"><div class="logo fl"></div></a>
 	<a href=""><div class="ad_top fl"></div></a>
 	<div class="nav fl">
 		<ul>
@@ -137,12 +137,12 @@ width:100%;
 			 	<c:forEach items="${goodsList}" var="goods" >
 				<div class='item'>
 				    <div class="xuangou_left fl">
-						<a href="GoodServlet?operate=detail&&good_name=${goods.good_name}">
-								<div class="img fl"><img style="width:40px;height:40px;" src="${goods.good_img}" alt=""></div>
-								<span class="fl">${goods.good_name}</span>
+						<a href="GoodServlet?operate=detail&&good_name=${goods.goodName}">
+								<div class="img fl"><img style="width:40px;height:40px;" src="${goods.goodImg}" alt=""></div>
+								<span class="fl">${goods.goodName}</span>
 								<div class="clear"></div>
 						</a>
-						<div class="xuangou_right fr item"><a href="GoodServlet?operate=detail&&good_name=${goods.good_name}" target="_blank" >选购</a></div>
+						<div class="xuangou_right fr item"><a href="GoodServlet?operate=detail&&good_name=${goods.goodName}" target="_blank" >选购</a></div>
 						<div class="clear"></div>
 					</div>
 				</div>

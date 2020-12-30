@@ -42,8 +42,10 @@ public class UserService {
 		createCriteria.andPasswordEqualTo(user.getPassword());
 		List<Users> selectByExample = mapper.selectByExample(usersExample);
 		if(selectByExample.size()>0){
+			sqlSession.close();
 			return selectByExample.get(0);
 		}else{
+			sqlSession.close();
 			return null;
 		}
 	}
@@ -63,8 +65,10 @@ public class UserService {
 		createCriteria1.andUidEqualTo(uid);
 		List<Users> selectByExample = mapper2.selectByExample(usersExample2);
 		Users user = selectByExample.get(0);
-		
 		sqlSession1.commit();
+		
+		sqlSession.close();
+		sqlSession1.close();
 		return user;
 
 	}

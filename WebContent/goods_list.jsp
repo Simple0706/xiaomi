@@ -115,10 +115,10 @@
 		<div class="main center">
 		<c:forEach items="${goodsList}" var="goods">
 		    <div class="mingxing fl mb20" style="border:2px solid #fff;width:230px;cursor:pointer;" onmouseout="this.style.border='2px solid #fff'" onmousemove="this.style.border='2px solid red'">
-				<div class="sub_mingxing"><a href="GoodServlet?operate=detail&&good_name=${goods.good_name }" ><img src=${goods.good_img } alt=""></a></div>
-				<div class="pinpai"><a href="GoodServlet?operate=detail&&good_name=${goods.good_name }" >${goods.good_name }</a></div>
-				<div class="youhui">${goods.good_desc}</div>
-				<div class="jiage">${goods.good_price }元</div>
+				<div class="sub_mingxing"><a href="GoodServlet?operate=detail&&good_name=${goods.goodName }" ><img src=${goods.goodImg } alt=""></a></div>
+				<div class="pinpai"><a href="GoodServlet?operate=detail&&good_name=${goods.goodName }" >${goods.goodName }</a></div>
+				<div class="youhui">${goods.goodDesc}</div>
+				<div class="jiage">${goods.goodPrice }元</div>
 			</div>
 		</c:forEach>		
 				</div>
