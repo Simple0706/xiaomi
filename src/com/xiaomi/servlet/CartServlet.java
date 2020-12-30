@@ -42,24 +42,26 @@ public class CartServlet extends HttpServlet {
 		if(user==null){
 			request.getRequestDispatcher("errorempty.jsp").forward(request, response);
 		}else{
+			boolean attribute =(boolean) request.getSession().getAttribute("cartGood");
+			if(attribute==true){
+				request.getRequestDispatcher("cartlist.jsp").forward(request, response);
+			}else{
 			Integer uid = user.getUid();
-			session.setAttribute("uid", uid);
-			
 			List<Cart> cartlist1 = cartService.selectCartList(uid);
-			
 			List<CartGood> cartlist = new ArrayList();
 			for(Cart cart:cartlist1){
 				int id=cart.getGoodId();
 				Good good = cartService.selectGoodById(id);
 				CartGood cartGood = new CartGood(cart,good);
 				cartlist.add(cartGood);
+				request.getSession().removeAttribute("cartGood");
+				request.getSession().setAttribute("cartGood", true);
 			}
-			
 			request.getSession().setAttribute("cartlist", cartlist);
 			
 			request.getRequestDispatcher("cartlist.jsp").forward(request, response);
 		}
-		
+		}
 		
 	}
 

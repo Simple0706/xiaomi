@@ -103,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	</div> 
 	    	<div class="goods-info"> 
 	    		<h3>已成功加入购物车！</h3>
-	    		<span class="name"><%=request.getParameter("good_name") %><%=request.getParameter("type") %> <%=request.getParameter("color") %>  </span>	
+	    		<span class="name"><%=request.getParameter("good_name")%><%=request.getParameter("type") %> <%=request.getParameter("color") %>  </span>	
 	    	</div>
 	    </div>
 	    <div class="actions">

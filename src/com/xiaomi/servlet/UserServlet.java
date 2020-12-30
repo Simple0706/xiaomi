@@ -104,6 +104,9 @@ public class UserServlet extends HttpServlet {
 			if(login!=null){
 				HttpSession session = request.getSession();
 				session.setAttribute("user",login);
+				session.setAttribute("username",login.getUsername());
+				session.setAttribute("uid", login.getUid());
+				request.getSession().setAttribute("cartGood", false);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "用户名不存在或密码错误");
