@@ -128,10 +128,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		<c:forEach items="${searchgoods}" var="search">
 	    <div class="mingxing fl mb20" style="border:2px solid #fff;width:230px;cursor:pointer;" onmouseout="this.style.border='2px solid #fff'" onmousemove="this.style.border='2px solid red'">
-			<div class="sub_mingxing"><a href="GoodServlet?operate=detail&&good_name=${search.good_name}" ><img src="${search.good_img}" alt=""></a></div>
-			<div class="pinpai"><a href="GoodServlet?operate=detail&&good_name=${search.good_name}" >${search.good_name}</a></div>
-			<div class="youhui">${search.good_desc}</div>
-			<div class="jiage">${search.good_price}</div>
+			<div class="sub_mingxing"><a href="GoodServlet?operate=detail&&good_name=${search.goodName}" ><img src="${search.goodImg}" alt=""></a></div>
+			<div class="pinpai"><a href="GoodServlet?operate=detail&&good_name=${search.goodName}" >${search.goodName}</a></div>
+			<div class="youhui">${search.goodDesc}</div>
+			<div class="jiage">${search.goodPrice}</div>
 		</div>
     	</c:forEach>
 

@@ -38,13 +38,25 @@ public class GoodServlet extends HttpServlet {
 			request.getSession().setAttribute("goodsList", selectGoodList);
 			request.getRequestDispatcher("goods_list.jsp").forward(request, response);
 		}
+		if("detail".equals(operate)){
+			
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		String operate = request.getParameter("operate");
+		GoodService goodservice = new GoodService();
+		if("search".equals(operate)){
+			String goodName = request.getParameter("good_name");
+			List<Good> selectGoodByName = goodservice.selectGoodByName(goodName);
+			request.getSession().setAttribute("searchgoods", selectGoodByName);
+			request.getRequestDispatcher("searchlist.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 }

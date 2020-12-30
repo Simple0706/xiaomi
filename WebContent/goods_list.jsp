@@ -118,7 +118,7 @@
 				<div class="sub_mingxing"><a href="GoodServlet?operate=detail&&good_name=${goods.goodName }" ><img src=${goods.goodImg } alt=""></a></div>
 				<div class="pinpai"><a href="GoodServlet?operate=detail&&good_name=${goods.goodName }" >${goods.goodName }</a></div>
 				<div class="youhui">${goods.goodDesc}</div>
-				<div class="jiage">${goods.goodPrice }元</div>
+				<div class="jiage">${goods.goodPrice}元</div>
 			</div>
 		</c:forEach>		
 				</div>

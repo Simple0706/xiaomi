@@ -131,20 +131,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<% int count = 0;%>
 				<c:forEach items="${cartlist}" var="list">
 				<% count += 1; %>
-				<input type="hidden" id = "cart_id" name = "cart_id" value ="${list.pre_id}" />
+				<input type="hidden" id = "cart_id" name = "cart_id" value ="${list.preId}" />
 				<input type = "hidden" id = "temperate_id" name = "temperate_id" value = "flag"/>
 					<div class="content2 center">
 						<div class="sub_content fl">
 							<input type="checkbox" id = "check" name="check" class="quanxuan" onclick="summary()" />
 						</div>
-						<div class="sub_content fl"><img style="height:80px;width:80px;" src="${list.g.good_img}"></div>
-						<div class="sub_content fl ft20">${list.g.good_name} ${list.g.good_type} ${list.g.good_color}</div>
-						<div class="sub_content fl ft20"><input type = "hidden" id= "good_price" name = "good_price" value="${list.g.good_price}"/>${list.g.good_price}</div>
+						<div class="sub_content fl"><img style="height:80px;width:80px;" src="${list.g.goodImg}"></div>
+						<div class="sub_content fl ft20">${list.g.goodName} ${list.g.goodType} ${list.g.goodColor}</div>
+						<div class="sub_content fl ft20"><input type = "hidden" id= "good_price" name = "good_price" value="${list.g.goodPrice}"/>${list.g.goodPrice}</div>
 						<div class="sub_content fl">
-							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num"value="${list.good_num}" step="1" min="1" max = "5" onblur="change_number()">
+							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num"value="${list.goodNum}" step="1" min="1" max = "5" onblur="change_number()">
 						</div>
 						<div class="sub_content fl" name ="price"><span><input type = "hidden" id= "price" value="${list.price}"/>${list.price}</span></div>
-						<div class="sub_content fl"><a href="CartServlet?operate=deleteCart&id=${list.pre_id}"><img src="./image/timg.png"></a></div>
+						<div class="sub_content fl"><a href="CartServlet?operate=deleteCart&id=${list.preId}"><img src="./image/timg.png"></a></div>
 						<div class="clear"></div>
 					</div>
 				</c:forEach>

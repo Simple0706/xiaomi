@@ -18,6 +18,7 @@ public class Cart {
 	private Integer status;
 
 	private Float price;
+	
 
 	public Integer getPreId() {
 		return preId;
