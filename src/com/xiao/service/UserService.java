@@ -72,5 +72,20 @@ public class UserService {
 		return user;
 
 	}
+	public int ajaxregister(Users user){
+		SqlSession sqlSession = DButil.getSqlSession();
+		UsersExample usersExample = new UsersExample();
+		UsersMapper mapper = sqlSession.getMapper(UsersMapper.class);
+		Criteria createCriteria = usersExample.createCriteria();
+		createCriteria.andUsernameEqualTo(user.getUsername());
+		List<Users> selectByExample = mapper.selectByExample(usersExample);
+		if(selectByExample.size()!=0){
+			return 0;
+		}else{
+			return 1;
+		}
+		
+		
+	}
 	
 }

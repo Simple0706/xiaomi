@@ -21,8 +21,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <meta name="author" content="order by dede58.com"/>
 		<title>用户注册</title>
 		<link rel="stylesheet" type="text/css" href="./css/login.css">
-		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
+		
    <script type="text/javascript">
+   $(function(){
+	   $("#ajaxyanzheng").blur(function(){
+		   var username=$("#ajaxyanzheng").val();
+		    
+		   $.ajax({
+			   url:"UserServlet",
+			   type:"post",
+			   datatype:"text",
+			   data:{"operate":"ajaxregister","username":username},
+			   success:function(data){
+				   if(data=="true"){
+					   $("#ajaxtishi").css("color","green")
+					   $("#ajaxtishi").text("用户名可以使用")
+				   }else{
+					   $("#ajaxtishi").css("color","red")
+					   $("#ajaxtishi").text("用户名以存在,请更换。")
+				   }
+			   }
+		   })
+	   })
+   })
+   
 	   function check_data()
 	   {
 		var reg1 = /^[a-zA-Z_]\w{5,15}$/; //用户名:长度在6-16,只能用数字字母下划线,数字不能开头
@@ -43,15 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//IE存在缓存,需要new Date()实现更换路径的作用
 		document.getElementById("image").src="image.jsp?"+new Date();
 	   }
-	   $(function(){
-		   $("#ajaxyanzheng").blur(function(){
-			  
-			   
-		   }) 
-	   })
-	  
-	   
+	 
 	   </script>
+	   
 	   
   </head>
   
@@ -67,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="xian center"></div>
 				</div>
 				<div class="regist_main center">
-					<div class="username">用&nbsp;&nbsp;户&nbsp;&nbsp;名:&nbsp;&nbsp;<input class="shurukuang" type="text" name="username" placeholder="请输入你的用户名" id="ajaxyanzheng"/><span>用户名长度在6-16位</span></div>
+					<div class="username">用&nbsp;&nbsp;户&nbsp;&nbsp;名:&nbsp;&nbsp;<input class="shurukuang" type="text" name="username" placeholder="请输入你的用户名" id="ajaxyanzheng"/><span id="ajaxtishi">用户名长度在6-16位</span></div>
 					<div class="username">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;&nbsp;<input class="shurukuang" type="password" name="password" placeholder="请输入你的密码"/><span>请输入6位以上字符</span></div>
 					<div class="username">确认密码:&nbsp;&nbsp;<input class="shurukuang" type="password" name="repassword" placeholder="请确认你的密码"/><span>两次密码要输入一致哦</span></div>
 					<div class="username">手&nbsp;&nbsp;机&nbsp;&nbsp;号:&nbsp;&nbsp;<input class="shurukuang" type="text" name="phonenumber" placeholder="请填写正确的手机号"/><span>填写下手机号吧，方便我们联系您！</span></div>

@@ -129,10 +129,20 @@ public class UserServlet extends HttpServlet {
 			request.getSession().setAttribute("user", editupdate);
 			request.getRequestDispatcher("self_info.jsp").forward(request, response);
 			
-//			request.setAttribute("user", );
+
 			
 		}
-		
+		if("ajaxregister".equals(operate)){
+			String username = request.getParameter("username");
+			Users user = new Users();
+			user.setUsername(username);
+			int register = userService.ajaxregister(user);
+			if(register==0){
+				response.getWriter().append("false");
+			}else{
+				response.getWriter().append("true");
+			}
+		}
 		
 		
 		
