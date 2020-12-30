@@ -42,9 +42,10 @@ public class CartServlet extends HttpServlet {
 		if(user==null){
 			request.getRequestDispatcher("errorempty.jsp").forward(request, response);
 		}else{
-			session.setAttribute("uid", user.getUid());
+			Integer uid = user.getUid();
+			session.setAttribute("uid", uid);
 			
-			List<Cart> cartlist1 = cartService.selectCartList();
+			List<Cart> cartlist1 = cartService.selectCartList(uid);
 			
 			List<CartGood> cartlist = new ArrayList();
 			for(Cart cart:cartlist1){
