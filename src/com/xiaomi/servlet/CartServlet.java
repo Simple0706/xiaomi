@@ -39,13 +39,35 @@ public class CartServlet extends HttpServlet {
 		CartService cartService = new CartService();
 		HttpSession session = request.getSession();
 		Users user = (Users)session.getAttribute("user");
+		String operate = request.getParameter("operate");
+		if("deleteCart".equals(operate)){
+			String idstr =request.getParameter("id");
+			int id = Integer.valueOf(idstr);
+			int uid = user.getUid();
+			int deleteCartById = cartService.deleteCartById(id,uid);
+//			request.getRequestDispatcher("CartServlet").forward(request, response);
+			response.sendRedirect("CartServlet");
+			return ;
+		}
+		if("change_number".equals(operate)){
+			String cartid = request.getParameter("cart_id");
+			String cartnum = request.getParameter("good_num");
+			String good_price = request.getParameter("good_price");
+			int cartid1=Integer.valueOf(good_price);
+			int cartnum1= Integer.valueOf(cartid);
+			int good_price1= Integer.valueOf(cartnum);
+			Cart cart = new Cart();
+			cart.setPreId(cartid1);
+			cart.setGoodNum(cartnum1);
+			float qian= good_price1*cartnum1;
+			cart.setPrice(qian);
+			int updateCartCartByCartId = cartService.updateCartCartByCartId(cart);
+			response.sendRedirect("CartServlet");
+			return ;
+		}
 		if(user==null){
 			request.getRequestDispatcher("errorempty.jsp").forward(request, response);
 		}else{
-			boolean attribute =(boolean) request.getSession().getAttribute("cartGood");
-			if(attribute==true){
-				request.getRequestDispatcher("cartlist.jsp").forward(request, response);
-			}else{
 			Integer uid = user.getUid();
 			List<Cart> cartlist1 = cartService.selectCartList(uid);
 			List<CartGood> cartlist = new ArrayList();
@@ -55,12 +77,11 @@ public class CartServlet extends HttpServlet {
 				CartGood cartGood = new CartGood(cart,good);
 				cartlist.add(cartGood);
 				request.getSession().removeAttribute("cartGood");
-				request.getSession().setAttribute("cartGood", true);
 			}
 			request.getSession().setAttribute("cartlist", cartlist);
 			
 			request.getRequestDispatcher("cartlist.jsp").forward(request, response);
-		}
+		
 		}
 		
 	}

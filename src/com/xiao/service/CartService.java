@@ -17,7 +17,7 @@ import com.xiaomi.pojo.vo.Good;
 
 
 public class CartService {
-	//根据id所有购物车
+	//根据id查询所有购物车
 	public List<Cart> selectCartList(int uid){
 		SqlSession sqlSession = DButil.getSqlSession();
 		CartMapper mapper = sqlSession.getMapper(CartMapper.class);
@@ -29,11 +29,13 @@ public class CartService {
 		return selectByExample;
 		
 	}
-	//根据Cart_id查询所有Good；
+	//根据Cart_id查询Good；
 	public Good selectGoodById(int id){
 		SqlSession sqlSession = DButil.getSqlSession();
 		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
 		Good selectByPrimaryKey = mapper.selectByPrimaryKey(id);
+		sqlSession.commit();
+		sqlSession.close();
 		return selectByPrimaryKey;
 	}
 	//添加数据
@@ -43,9 +45,11 @@ public class CartService {
 		int insert = mapper.insertSelective(cart);
 		if(insert>0){
 			sqlSession.commit();
+			sqlSession.close();
 			return 1;
 		}else{
 			sqlSession.rollback();
+			sqlSession.close();
 		return 0;
 		}
 	}
@@ -61,4 +65,45 @@ public class CartService {
 		sqlSession.close();
 		return 1;
 	}
+	//根据uid判断购物车是否有数据
+	public Cart isCreadata(int goodid,int uid){
+		SqlSession sqlSession = DButil.getSqlSession();
+		CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+		CartExample cartExample = new CartExample();
+		Criteria createCriteria = cartExample.createCriteria();
+		createCriteria.andGoodIdEqualTo(goodid);
+		createCriteria.andUidEqualTo(uid);
+		List<Cart> selectByExample = mapper.selectByExample(cartExample);
+		Cart cart = selectByExample.get(0);
+		sqlSession.commit();
+		sqlSession.close();
+		if(selectByExample.size()>0){
+			return cart;
+		}else{
+			return null;
+		}
+	}
+	
+		//根据id删除uid购物车物品
+		public int deleteCartById(int id,int uid){
+			SqlSession sqlSession = DButil.getSqlSession();
+			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+			CartExample cartExample = new CartExample();
+			Criteria createCriteria = cartExample.createCriteria();
+			createCriteria.andPreIdEqualTo(id);
+			createCriteria.andUidEqualTo(uid);
+			int deleteByExample = mapper.deleteByExample(cartExample);
+			sqlSession.commit();
+			sqlSession.close();
+			return deleteByExample;
+		}
+		//根据cart_id修改个数
+		public int updateCartCartByCartId(Cart cart){
+			SqlSession sqlSession = DButil.getSqlSession();
+			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+			int updateByPrimaryKeySelective = mapper.updateByPrimaryKeySelective(cart);
+			sqlSession.commit();
+			sqlSession.close();
+			return updateByPrimaryKeySelective;
+		}
 }
