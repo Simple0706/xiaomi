@@ -55,6 +55,7 @@ public class GoodService {
 		Criteria createCriteria = goodExample.createCriteria();
 		createCriteria.andGoodNameEqualTo(name);
 		createCriteria.andGoodTypeEqualTo(type);
+		
 		List<Good> selectByExample = mapper.selectByExample(goodExample);
 		
 		sqlSession.close();
