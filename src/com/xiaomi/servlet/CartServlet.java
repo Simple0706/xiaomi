@@ -90,7 +90,6 @@ public class CartServlet extends HttpServlet {
 			int cartnum1 = Integer.valueOf(cartnum);
 			float parseFloat = Float.parseFloat(good_price);
 			Cart cart = new Cart();
-			cart.setPreId(cartid1);
 			cart.setGoodNum(cartnum1);
 			cart.setPrice(parseFloat*cartnum1);
 			cartService.updateCartCartByCartId(cart,user.getUid());

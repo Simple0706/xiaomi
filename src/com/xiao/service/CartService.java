@@ -129,4 +129,17 @@ public class CartService {
 				return null;
 			}
 		}
+		public int updateCartByUidAndPreId(Cart cart, int uid, int preId) {
+			SqlSession sqlSession = DButil.getSqlSession();
+			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+			CartExample cartExample = new CartExample();
+			Criteria createCriteria = cartExample.createCriteria();
+			createCriteria.andUidEqualTo(uid);
+			createCriteria.andPreIdEqualTo(preId);
+			int updateByExampleSelective = mapper.updateByExampleSelective(cart, cartExample);
+			sqlSession.commit();
+			sqlSession.close();
+			return updateByExampleSelective;
+			
+		}
 }
