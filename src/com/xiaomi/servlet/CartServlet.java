@@ -49,22 +49,7 @@ public class CartServlet extends HttpServlet {
 			response.sendRedirect("CartServlet");
 			return ;
 		}
-		if("change_number".equals(operate)){
-			String cartid = request.getParameter("cart_id");
-			String cartnum = request.getParameter("good_num");
-			String good_price = request.getParameter("good_price");
-			int cartid1=Integer.valueOf(good_price);
-			int cartnum1= Integer.valueOf(cartid);
-			int good_price1= Integer.valueOf(cartnum);
-			Cart cart = new Cart();
-			cart.setPreId(cartid1);
-			cart.setGoodNum(cartnum1);
-			float qian= good_price1*cartnum1;
-			cart.setPrice(qian);
-			int updateCartCartByCartId = cartService.updateCartCartByCartId(cart);
-			response.sendRedirect("CartServlet");
-			return ;
-		}
+		
 		if(user==null){
 			request.getRequestDispatcher("errorempty.jsp").forward(request, response);
 		}else{
@@ -90,7 +75,28 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CartService cartService = new CartService();
+		HttpSession session = request.getSession();
+		Users user = (Users)session.getAttribute("user");
+		String operate = request.getParameter("operate");
 		
+		//增加数据
+		
+		if("change_number".equals(operate)){
+			String cartid = request.getParameter("cart_id");
+			String cartnum = request.getParameter("good_num");
+			String good_price = request.getParameter("good_price");
+			int cartid1=Integer.valueOf(cartid);
+			int cartnum1 = Integer.valueOf(cartnum);
+			float parseFloat = Float.parseFloat(good_price);
+			Cart cart = new Cart();
+			cart.setPreId(cartid1);
+			cart.setGoodNum(cartnum1);
+			cart.setPrice(parseFloat*cartnum1);
+			cartService.updateCartCartByCartId(cart,user.getUid());
+			response.sendRedirect("CartServlet");
+			return ;
+		}
 	}
 
 }

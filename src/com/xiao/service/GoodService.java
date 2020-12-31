@@ -16,6 +16,7 @@ public class GoodService {
 		SqlSession sqlSession = DButil.getSqlSession();
 		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
 		List<Good> selectByExample = mapper.selectByExample(null);
+		sqlSession.commit();
 		sqlSession.close();
 		return selectByExample;
 	}
@@ -27,12 +28,38 @@ public class GoodService {
 		Criteria createCriteria = goodExample.createCriteria();
 		createCriteria.andGoodNameEqualTo(name);
 		List<Good> selectByExample = mapper.selectByExample(goodExample);
+		sqlSession.commit();
 		sqlSession.close();
 		return selectByExample;
 		
 		
 	}
-	
+	//根据id模糊查询手机
+	public List<Good> selectGoodLikeByName(String name){
+		SqlSession sqlSession = DButil.getSqlSession();
+		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
+		GoodExample goodExample = new GoodExample();
+		Criteria createCriteria = goodExample.createCriteria();
+		createCriteria.andGoodNameLike(name);
+		List<Good> selectByExample = mapper.selectByExample(goodExample);
+		sqlSession.commit();
+		sqlSession.close();
+		return selectByExample;
+		
+		
+	}
+	public Good selectGoodByNameAndType(String name, String type) {
+		SqlSession sqlSession = DButil.getSqlSession();
+		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
+		GoodExample goodExample = new GoodExample();
+		Criteria createCriteria = goodExample.createCriteria();
+		createCriteria.andGoodNameEqualTo(name);
+		createCriteria.andGoodTypeEqualTo(type);
+		List<Good> selectByExample = mapper.selectByExample(goodExample);
+		sqlSession.commit();
+		sqlSession.close();
+		return selectByExample.get(0);
+	}
 	
 	
 }

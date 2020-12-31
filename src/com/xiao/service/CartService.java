@@ -98,12 +98,35 @@ public class CartService {
 			return deleteByExample;
 		}
 		//根据cart_id修改个数
-		public int updateCartCartByCartId(Cart cart){
+		public int updateCartCartByCartId(Cart cart,int uid){
 			SqlSession sqlSession = DButil.getSqlSession();
 			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
-			int updateByPrimaryKeySelective = mapper.updateByPrimaryKeySelective(cart);
+			CartExample cartExample = new CartExample();
+			Criteria createCriteria = cartExample.createCriteria();
+			createCriteria.andUidEqualTo(uid);
+			int updateByExampleSelective = mapper.updateByExampleSelective(cart, cartExample);
 			sqlSession.commit();
 			sqlSession.close();
-			return updateByPrimaryKeySelective;
+			return updateByExampleSelective;
+		}
+		
+		public Cart selectGoodByUidAndGoodid(int uid, int goodid) {
+			SqlSession sqlSession = DButil.getSqlSession();
+			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
+			CartExample cartExample = new CartExample();
+			Criteria createCriteria = cartExample.createCriteria();
+			createCriteria.andGoodIdEqualTo(goodid);
+			createCriteria.andUidEqualTo(uid);
+			List<Cart> selectByExample = mapper.selectByExample(cartExample);
+			sqlSession.close();
+			if(selectByExample.size()>0){
+				sqlSession.commit();
+				sqlSession.close();
+				return selectByExample.get(0);
+			}else{
+				sqlSession.commit();
+				sqlSession.close();
+				return null;
+			}
 		}
 }
