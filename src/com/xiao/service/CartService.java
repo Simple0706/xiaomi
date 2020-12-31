@@ -34,7 +34,7 @@ public class CartService {
 		SqlSession sqlSession = DButil.getSqlSession();
 		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
 		Good selectByPrimaryKey = mapper.selectByPrimaryKey(id);
-		sqlSession.commit();
+		
 		sqlSession.close();
 		return selectByPrimaryKey;
 	}
@@ -75,7 +75,7 @@ public class CartService {
 		createCriteria.andUidEqualTo(uid);
 		List<Cart> selectByExample = mapper.selectByExample(cartExample);
 		Cart cart = selectByExample.get(0);
-		sqlSession.commit();
+		
 		sqlSession.close();
 		if(selectByExample.size()>0){
 			return cart;
@@ -109,7 +109,7 @@ public class CartService {
 			sqlSession.close();
 			return updateByExampleSelective;
 		}
-		
+		//查询购物车是否有添加手机
 		public Cart selectGoodByUidAndGoodid(int uid, int goodid) {
 			SqlSession sqlSession = DButil.getSqlSession();
 			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
@@ -120,22 +120,22 @@ public class CartService {
 			List<Cart> selectByExample = mapper.selectByExample(cartExample);
 			sqlSession.close();
 			if(selectByExample.size()>0){
-				sqlSession.commit();
+				
 				sqlSession.close();
 				return selectByExample.get(0);
 			}else{
-				sqlSession.commit();
+				
 				sqlSession.close();
 				return null;
 			}
 		}
-		public int updateCartByUidAndPreId(Cart cart, int uid, int preId) {
+		public int updateCartCartByCartId(Cart cart,int uid,int cartid) {
 			SqlSession sqlSession = DButil.getSqlSession();
 			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
 			CartExample cartExample = new CartExample();
 			Criteria createCriteria = cartExample.createCriteria();
 			createCriteria.andUidEqualTo(uid);
-			createCriteria.andPreIdEqualTo(preId);
+			createCriteria.andPreIdEqualTo(cartid);
 			int updateByExampleSelective = mapper.updateByExampleSelective(cart, cartExample);
 			sqlSession.commit();
 			sqlSession.close();

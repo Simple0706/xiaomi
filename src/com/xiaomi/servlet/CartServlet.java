@@ -92,7 +92,7 @@ public class CartServlet extends HttpServlet {
 			Cart cart = new Cart();
 			cart.setGoodNum(cartnum1);
 			cart.setPrice(parseFloat*cartnum1);
-			cartService.updateCartCartByCartId(cart,user.getUid());
+			cartService.updateCartCartByCartId(cart, user.getUid(),cartid1 );
 			response.sendRedirect("CartServlet");
 			return ;
 		}
