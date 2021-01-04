@@ -48,18 +48,25 @@ public class GoodService {
 		
 		
 	}
-	public Good selectGoodByNameAndType(String name, String type) {
+	public Good selectGoodByNameAndType(String name, String type,String color) {
 		SqlSession sqlSession = DButil.getSqlSession();
 		GoodMapper mapper = sqlSession.getMapper(GoodMapper.class);
 		GoodExample goodExample = new GoodExample();
 		Criteria createCriteria = goodExample.createCriteria();
 		createCriteria.andGoodNameEqualTo(name);
 		createCriteria.andGoodTypeEqualTo(type);
-		
+		if(color!=null){
+		createCriteria.andGoodColorEqualTo(color);
+		}
 		List<Good> selectByExample = mapper.selectByExample(goodExample);
 		
 		sqlSession.close();
-		return selectByExample.get(0);
+		if(selectByExample!=null){
+			System.out.println(selectByExample);
+			Good good11 = selectByExample.get(0);
+			return good11;
+		}
+		return null;
 	}
 	
 	

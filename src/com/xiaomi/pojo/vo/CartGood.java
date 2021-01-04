@@ -2,8 +2,6 @@ package com.xiaomi.pojo.vo;
 
 public class CartGood {
 	
-		
-
 		private Integer preId;
 
 		private Integer uid;

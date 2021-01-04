@@ -87,7 +87,7 @@ public class GoodServlet extends HttpServlet {
 							String type=request.getParameter("type");
 							String color=request.getParameter("color");
 							if(type!=null&&color!=null){
-								Good good = goodservice.selectGoodByNameAndType(name,type);
+								Good good = goodservice.selectGoodByNameAndType(name,type,color);
 								int goodId = good.getGoodId();
 								CartService cartservice = new CartService();
 								Cart cartall = cartservice.selectGoodByUidAndGoodid(user.getUid(),goodId);
@@ -109,7 +109,7 @@ public class GoodServlet extends HttpServlet {
 								}else{
 									Cart cart = new Cart();
 									cart.setGoodNum(cartall.getGoodNum()+1);
-									cart.setPrice(cartall.getPrice()*2);
+									cart.setPrice(cartall.getGoodNum()*good.getGoodPrice());
 									int updateCartCartByCartId = cartservice.updateCartCartByCartId(cart, user.getUid(),cartall.getPreId());
 									request.getRequestDispatcher("success_add_cart.jsp").forward(request, response);
 								}
