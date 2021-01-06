@@ -45,6 +45,7 @@ public class CartServlet extends HttpServlet {
 			int id = Integer.valueOf(idstr);
 			int uid = user.getUid();
 			int deleteCartById = cartService.deleteCartById(id,uid);
+//			this.doGet(request, response);
 //			request.getRequestDispatcher("CartServlet").forward(request, response);
 			response.sendRedirect("CartServlet");
 			return ;
@@ -55,14 +56,18 @@ public class CartServlet extends HttpServlet {
 		}else{
 			Integer uid = user.getUid();
 			List<Cart> cartlist1 = cartService.selectCartList(uid);
+			if(cartlist1.size()==0){
+				request.getRequestDispatcher("errorempty.jsp").forward(request, response);
+				return ;
+			}
 			List<CartGood> cartlist = new ArrayList();
 			for(Cart cart:cartlist1){
 				int id=cart.getGoodId();
 				Good good = cartService.selectGoodById(id);
 				CartGood cartGood = new CartGood(cart,good);
 				cartlist.add(cartGood);
-				request.getSession().removeAttribute("cartGood");
 			}
+			request.getSession().removeAttribute("cartGood");
 			request.getSession().setAttribute("cartlist", cartlist);
 			
 			request.getRequestDispatcher("cartlist.jsp").forward(request, response);
@@ -92,7 +97,7 @@ public class CartServlet extends HttpServlet {
 			Cart cart = new Cart();
 			cart.setGoodNum(cartnum1);
 			cart.setPrice(parseFloat*cartnum1);
-			cartService.updateCartCartByCartId(cart, user.getUid(),cartid1 );
+//			cartService.updateCartCartByCartId(cart, user.getUid(),cartid1 );
 			response.sendRedirect("CartServlet");
 			return ;
 		}

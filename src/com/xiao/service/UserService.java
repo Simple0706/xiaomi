@@ -80,8 +80,10 @@ public class UserService {
 		createCriteria.andUsernameEqualTo(user.getUsername());
 		List<Users> selectByExample = mapper.selectByExample(usersExample);
 		if(selectByExample.size()!=0){
+			sqlSession.close();
 			return 0;
 		}else{
+			sqlSession.close();
 			return 1;
 		}
 		

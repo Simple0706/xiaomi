@@ -61,6 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		}
 	 		function change_number(){
 	 			var num = document.getElementById("good_num").value;
+	 			var id = document.getElementById("good_id").value;
 	 			if (num == 0){
 	 				alert("该宝贝不能减少了哟~");
 	 			}else{
@@ -141,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="sub_content fl ft20">${list.g.goodName} ${list.g.goodType} ${list.g.goodColor}</div>
 						<div class="sub_content fl ft20"><input type = "hidden" id= "good_price" name = "good_price" value="${list.g.goodPrice}"/>${list.g.goodPrice}</div>
 						<div class="sub_content fl">
-							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num"value="${list.goodNum}" step="1" min="1" max = "5" onblur="change_number()">
+							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num"value="${list.goodNum}" step="1" min="1" max ="5" onblur="change_number()">
 						</div>
 						<div class="sub_content fl" name ="price"><span><input type = "hidden" id= "price" value="${list.price}"/>${list.price}</span></div>
 						<div class="sub_content fl"><a href="CartServlet?operate=deleteCart&id=${list.preId}"><img src="./image/timg.png"></a></div>
