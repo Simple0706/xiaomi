@@ -61,14 +61,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		}
 	 		function change_number(obj){
 	 			var num1 = obj.value;
+	 			var max = $(obj).attr("max");
 	 			/* var id = document.getElementById("good_id").value; */
+	 			
+	 			
+	 			if (parseInt(num1)>parseInt(max)){
+	 				alert("该宝贝库存只有"+max+"不能再多啦");
+	 				return
+	 			}
 	 			if (num1 <= 0){
 	 				alert("该宝贝不能减少了哟~");
 	 			}else{
 	 				/* document.getElementById("operate").value="change_number";
 	 				document.forms[0].submit(); */
 	 				
-	 				debugger
+	 				
 	 				var operate = "change_number1";
 	 				var good_num =num1;
 	 				var cart_id =  $(obj).parents(".sub_content").parents(".content2").prev().prev().val();

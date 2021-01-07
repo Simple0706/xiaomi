@@ -107,12 +107,17 @@ public class GoodServlet extends HttpServlet {
 										return ;
 									}
 								}else{
-									Cart cart = new Cart();
-									cart.setPreId(cartall.getPreId());
-									cart.setGoodNum(cartall.getGoodNum()+1);
-									cart.setPrice(cart.getGoodNum()*good.getGoodPrice());
-									cartservice.updateCartCartByCartId(cart);
-									request.getRequestDispatcher("success_add_cart.jsp").forward(request, response);
+									if(cartall.getGoodNum()+1<=good.getGoodCount()){
+										Cart cart = new Cart();
+										cart.setPreId(cartall.getPreId());
+										cart.setGoodNum(cartall.getGoodNum()+1);
+										cart.setPrice(cart.getGoodNum()*good.getGoodPrice());
+										cartservice.updateCartCartByCartId(cart);
+										request.getRequestDispatcher("success_add_cart.jsp").forward(request, response);
+									}else{
+										response.getWriter().append("库存数量不够啦");
+										
+									}
 								}
 								
 							}

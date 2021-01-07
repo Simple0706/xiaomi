@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="ddzx">个人中心</div>
 		<div class="subddzx">
-			<ul>
+			<ul>987
 				<li><a href="./self_info.html">我的个人中心</a></li>
 				<li><a href="">消息通知</a></li>
 				<li><a href="">优惠券</a></li>
