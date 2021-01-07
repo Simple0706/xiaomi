@@ -88,19 +88,29 @@ public class CartServlet extends HttpServlet {
 		//增加数据
 		
 		if("change_number".equals(operate)){
-			String cartid = request.getParameter("cart_id");
-			String cartnum = request.getParameter("good_num");
-			String good_price = request.getParameter("good_price");
-			int cartid1=Integer.valueOf(cartid);
-			int cartnum1 = Integer.valueOf(cartnum);
-			float parseFloat = Float.parseFloat(good_price);
-			Cart cart = new Cart();
-			cart.setGoodNum(cartnum1);
-			cart.setPrice(parseFloat*cartnum1);
-//			cartService.updateCartCartByCartId(cart, user.getUid(),cartid1 );
+			String[] cartid = request.getParameterValues("cart_id");
+			String[] cartnum = request.getParameterValues("good_num");
+			String[] good_price = request.getParameterValues("good_price");
+			
+			for(int x=0;x<cartid.length;x++){
+				int cartid1=Integer.valueOf(cartid[x]);
+				int cartnum1 = Integer.valueOf(cartnum[x]);
+				float parseFloat = Float.parseFloat(good_price[x]);
+				Cart cart = new Cart();
+				cart.setPreId(cartid1);
+				cart.setGoodNum(cartnum1);
+				cart.setPrice(parseFloat*cartnum1);
+				boolean is = cartService.updateCartCartByCartId(cart);
+			}
+//			request.getRequestDispatcher("CartServlet").forward(request, response);
 			response.sendRedirect("CartServlet");
 			return ;
 		}
+		
+		
+		
+		
 	}
+	
 
 }

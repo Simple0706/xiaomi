@@ -54,7 +54,7 @@
 					<ul>
 						<% 
 	String username = (String)session.getAttribute("username");
-	int uid = (Integer)session.getAttribute("uid");
+	Integer uid = (Integer)session.getAttribute("uid");
 	if(username!=null){
 	%>
 		<li><%=username %></li>

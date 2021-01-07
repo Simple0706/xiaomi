@@ -129,17 +129,13 @@ public class CartService {
 				return null;
 			}
 		}
-		public int updateCartCartByCartId(Cart cart,int uid,int cartid) {
+	
+		public boolean updateCartCartByCartId(Cart cart) {
 			SqlSession sqlSession = DButil.getSqlSession();
 			CartMapper mapper = sqlSession.getMapper(CartMapper.class);
-			CartExample cartExample = new CartExample();
-			Criteria createCriteria = cartExample.createCriteria();
-			createCriteria.andUidEqualTo(uid);
-			createCriteria.andPreIdEqualTo(cartid);
-			int updateByExampleSelective = mapper.updateByExampleSelective(cart, cartExample);
+			int updateByExampleSelective = mapper.updateByPrimaryKeySelective(cart);
 			sqlSession.commit();
 			sqlSession.close();
-			return updateByExampleSelective;
-			
+			return updateByExampleSelective==1?true:false;	
 		}
 }

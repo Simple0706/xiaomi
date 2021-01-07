@@ -108,9 +108,10 @@ public class GoodServlet extends HttpServlet {
 									}
 								}else{
 									Cart cart = new Cart();
+									cart.setPreId(cartall.getPreId());
 									cart.setGoodNum(cartall.getGoodNum()+1);
 									cart.setPrice(cart.getGoodNum()*good.getGoodPrice());
-									int updateCartCartByCartId = cartservice.updateCartCartByCartId(cart, user.getUid(),cartall.getPreId());
+									cartservice.updateCartCartByCartId(cart);
 									request.getRequestDispatcher("success_add_cart.jsp").forward(request, response);
 								}
 								
