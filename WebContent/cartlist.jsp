@@ -59,14 +59,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 			$("#total_price").attr("value",total_price);
 	 			$("#total_count").attr("value",total_count);
 	 		}
-	 		function change_number(){
-	 			var num = document.getElementById("good_num").value;
+	 		function change_number(obj){
+	 			var num1 = obj.value;
 	 			/* var id = document.getElementById("good_id").value; */
-	 			if (num == 0){
+	 			if (num1 <= 0){
 	 				alert("该宝贝不能减少了哟~");
 	 			}else{
-	 				document.getElementById("operate").value="change_number";
-	 				document.forms[0].submit();
+	 				/* document.getElementById("operate").value="change_number";
+	 				document.forms[0].submit(); */
+	 				
+	 				debugger
+	 				var operate = "change_number1";
+	 				var good_num =num1;
+	 				var cart_id =  $(obj).parents(".sub_content").parents(".content2").prev().prev().val();
+	 				var good_price = $(obj).parents(".sub_content").parents(".content2").find("#good_price").val();
+	 				 $.ajax({
+	 					url:"CartServlet",
+	 					type:"post",
+	 					data:{"operate":operate,"good_num":good_num,"cart_id":cart_id,"good_price":good_price},
+	 					datatype:"json",
+	 					success:function(data){
+	 						var data1=JSON.parse(data)
+	 						$(obj).parents(".sub_content").parents(".content2").find("#good_num").val(data1.num)
+	 						$(obj).parents(".sub_content").parents(".content2").find("#price").val(data1.price)
+	 						$(obj).parents(".sub_content").parents(".content2").find("#price").next().text(data1.price.toFixed(1))
+	 						
+	 					}
+	 					
+	 				}) 
 	 			}
 	 		}
 	 		function settlement(){
@@ -142,9 +162,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="sub_content fl ft20">${list.g.goodName} ${list.g.goodType} ${list.g.goodColor}</div>
 						<div class="sub_content fl ft20"><input type = "hidden" id= "good_price" name = "good_price" value="${list.g.goodPrice}"/>${list.g.goodPrice}</div>
 						<div class="sub_content fl">
-							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num" value="${list.goodNum}" step="1" min="1" max ="${list.g.goodCount}" onblur= "change_number()" >
+							<input class="shuliang" type="number" autocomplete="off" id = "good_num" name = "good_num" value="${list.goodNum}" step="1" min="1" max ="${list.g.goodCount}" onblur= "change_number(this)" >
 						</div>
-						<div class="sub_content fl" name ="price"><span><input type = "hidden" id= "price" value="${list.price}"/>${list.price}</span></div>
+						<div class="sub_content fl" name ="price"><span><input type = "hidden" id= "price" value="${list.price}"/>
+						<span>${list.price}</span></span></div>
 						<div class="sub_content fl"><a href="CartServlet?operate=deleteCart&id=${list.preId}"><img src="./image/timg.png"></a></div>
 						<div class="clear"></div>
 					</div>

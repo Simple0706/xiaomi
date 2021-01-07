@@ -17,6 +17,8 @@ import com.xiaomi.pojo.vo.CartGood;
 import com.xiaomi.pojo.vo.Good;
 import com.xiaomi.pojo.vo.Users;
 
+import net.sf.json.JSONObject;
+
 /**
  * Servlet implementation class CartServlet
  */
@@ -105,6 +107,23 @@ public class CartServlet extends HttpServlet {
 //			request.getRequestDispatcher("CartServlet").forward(request, response);
 			response.sendRedirect("CartServlet");
 			return ;
+		}if("change_number1".equals(operate)){
+			String cartid = request.getParameter("cart_id");
+			String cartnum = request.getParameter("good_num");
+			String good_price = request.getParameter("good_price");
+			int cartid1=Integer.valueOf(cartid);
+			int cartnum1 = Integer.valueOf(cartnum);
+			float parseFloat = Float.parseFloat(good_price);
+			Cart cart = new Cart();
+			cart.setPreId(cartid1);
+			cart.setGoodNum(cartnum1);
+			cart.setPrice(parseFloat*cartnum1);
+			boolean is = cartService.updateCartCartByCartId(cart);
+			JSONObject js = new JSONObject();
+			js.put("num", cartnum1);
+			js.put("price", cart.getPrice());
+			
+			response.getWriter().append(js.toString());
 		}
 		
 		
