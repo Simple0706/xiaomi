@@ -96,15 +96,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 				}) 
 	 			}
 	 		}
-	 		function settlement(){
+	 		function settlement(obj){
 	 			var check = document.getElementsByName("check");
 	 			var cart_id = document.getElementsByName("cart_id");
 	 			var temperate_id = document.getElementsByName("temperate_id");
+	 			
 	 			for(var i = 0;i<check.length;i++){
 		 			if(check[i].checked == true){
 		 				temperate_id[i].value = cart_id[i].defaultValue;
 		 			}	 			
 	 			}
+	 			
+	 			
 	 		}
  		</script>
   </head>
@@ -189,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="jiesuan fr">
 					<div class="jiesuanjiage fl">合计（不含运费）：<input id = "total_price" type = "text"  name ="total_price" value = 0.0 style="border:0px;width:40px" readonly/></div>
-					<div class="jsanniu fr"><a href="alipay.jsp"><input class="jsan" type="submit"  id  = "jiesuan" name="jiesuan"  value="去结算" onclick="settlement()"/></a></div>
+					<div class="jsanniu fr"><a href="alipay.jsp"><input class="jsan" type="submit"  id  = "jiesuan" name="jiesuan"  value="去结算" onclick="settlement(this)"/></a></div>
 
 					<div class="clear"></div>
 				</div>

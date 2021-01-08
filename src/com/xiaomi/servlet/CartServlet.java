@@ -125,7 +125,12 @@ public class CartServlet extends HttpServlet {
 			
 			response.getWriter().append(js.toString());
 		}
-		
+		if("jiesuan".equals(operate)){
+			
+			String total_price=request.getParameter("total_price");
+			session.setAttribute("pirce", total_price);
+			request.getRequestDispatcher("zhifu.jsp").forward(request, response);
+		}
 		
 		
 		
